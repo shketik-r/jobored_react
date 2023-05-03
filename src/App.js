@@ -5,10 +5,10 @@ import axios from "axios";
 
 function App() {
 
-    let login = "sergei.stralenia@gmail.com"
-    let password = "paralect123"
-    let client_id = 2356
-    let client_secret = "v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948"
+    const login = "sergei.stralenia@gmail.com"
+    const password = "paralect123"
+    const client_id = 2356
+    const client_secret = "v3.r.137440105.ffdbab114f92b821eac4e21f485343924a773131.06c3bdbb8446aeb91c35b80c42ff69eb9c457948"
     const URL = `https://startup-summer-2023-proxy.onrender.com/2.0/oauth2/password/?login=${login}&password=${password}&client_id=${client_id}&client_secret=${client_secret}`
 
     axios.get(URL, {
@@ -19,7 +19,7 @@ function App() {
         })
 
 
-    axios.get(`https://startup-summer-2023-proxy.onrender.com/2.0/catalogues/?login=${login}&password=${password}&client_id=${client_id}&client_secret=${client_secret}`, {
+    axios.get(`https://startup-summer-2023-proxy.onrender.com/2.0/catalogues`, {
         headers: {"x-secret-key": "GEU4nvd3rej*jeh.eqp"}
     })
         .then(res => {
