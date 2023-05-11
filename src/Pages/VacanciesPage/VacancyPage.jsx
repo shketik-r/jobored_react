@@ -1,13 +1,15 @@
-import s from './VacanciePage.module.css'
+import s from './VacancyPage.module.css'
 import {useEffect, useState} from "react";
 import axios from "axios";
 import {client_secret, token} from "../../App";
 
 
-function VacanciePage(props) {
-    const [data, setData] = useState([])
+function VacancyPage(props) {
+    const [vacancy, setVacancy] = useState({})
+
     useEffect(() => {
-        axios.get(`https://startup-summer-2023-proxy.onrender.com/2.0/vacancies/35276608/`, {
+        let href = window.location.pathname;
+        axios.get(`https://startup-summer-2023-proxy.onrender.com/2.0${href}`, {
             headers: {
                 "x-secret-key": "GEU4nvd3rej*jeh.eqp",
                 "X-Api-App-Id": client_secret,
@@ -15,17 +17,29 @@ function VacanciePage(props) {
             }
         })
             .then(res => {
-                console.log(res.data);
+                setVacancy(res.data)
             })
     }, [])
 
 
-
-    return (
-        <div>
-           123
-        </div>
-    )
+    if (Object.keys(vacancy).length !== 0) {      
+        return (
+            <div>
+                <div className={s.card}>
+                    <div>{vacancy.profession}</div>
+                    <div>{vacancy.firm_name}</div>
+                    <div>{vacancy.town.title}</div>
+                    <div>{vacancy.type_of_work.title}</div>
+                    <div>зп от {vacancy.payment_from} rub</div>
+                </div>
+                <div className={s.card} >
+                    {vacancy.vacancyRichText} 
+                </div>
+            </div>
+        )
+    }else{
+        return "Loading"
+    }
 }
 
-export default VacanciePage;
+export default VacancyPage;
