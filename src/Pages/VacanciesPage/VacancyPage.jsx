@@ -35,9 +35,7 @@ function VacancyPage(props) {
                     <div>{vacancy.type_of_work.title}</div>
                     <div>зп от {vacancy.payment_from} rub</div>
                 </div>
-                <div className={s.card} dangerouslySetInnerHTML={createMarkup()}>
-
-                </div>
+                <div className={s.card} dangerouslySetInnerHTML={createMarkup()}/>
             </div>
         )
     } else {
