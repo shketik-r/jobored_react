@@ -21,8 +21,11 @@ function VacancyPage(props) {
             })
     }, [])
 
+    function createMarkup() {
+        return {__html: vacancy.vacancyRichText};
+    }
 
-    if (Object.keys(vacancy).length !== 0) {      
+    if (Object.keys(vacancy).length !== 0) {
         return (
             <div>
                 <div className={s.card}>
@@ -32,12 +35,12 @@ function VacancyPage(props) {
                     <div>{vacancy.type_of_work.title}</div>
                     <div>зп от {vacancy.payment_from} rub</div>
                 </div>
-                <div className={s.card} >
-                    {vacancy.vacancyRichText} 
+                <div className={s.card} dangerouslySetInnerHTML={createMarkup()}>
+
                 </div>
             </div>
         )
-    }else{
+    } else {
         return "Loading"
     }
 }
