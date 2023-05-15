@@ -1,20 +1,29 @@
-import s from './VacancyCard.module.css'
+import s from './VacanciesList.module.css'
 import {NavLink} from "react-router-dom";
 
-function VacancyCard(props) {
+function VacanciesList(props) {
+    console.log(props);
+    let vacancy = props.vacancies.map((e) => {
+        return (
+            <div className={s.card} key={e.id} id={e.id}>
+                <input type="checkbox"/>
+                <NavLink to={`/vacancies/${e.id}/`}>
+                    <div>{e.profession}</div>
+                </NavLink>
+                <div>{e.firmName}</div>
+                <div>{e.town}</div>
+                <div>{e.typeOfWork}</div>
+                {e.paymentFrom>0?(
+                    <div>зп от {e.paymentFrom} rub</div>
+                ):'зп не указана'}
+
+            </div>
+        )
+    })
     return (
-        <div className={s.card} key={props.id} id={props.id}>
-            <input type="checkbox" />
-            <NavLink to={`/vacancies/${props.id}/`}>
-                <div>{props.profession}</div>
-            </NavLink>
-            <div>{props.firmName}</div>
-            <div>{props.town}</div>
-            <div>{props.typeOfWork}</div>
-            <div>зп от {props.paymentFrom} rub</div>
-        </div>
+        <>
+            {vacancy}
+        </>
     )
-
 }
-
-export default VacancyCard;
+export default VacanciesList;

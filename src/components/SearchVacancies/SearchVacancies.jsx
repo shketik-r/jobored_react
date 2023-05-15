@@ -1,29 +1,27 @@
-import s from './VacanciesList.module.css'
-import {NavLink} from "react-router-dom";
+import s from './SearchVacancies.module.css'
+import {getApi} from "../../utils/network";
+import {useEffect} from "react";
+import {URL, URLVacancies} from "../../constans/apiConstants";
 
-function VacanciesList(props) {
-    console.log(props);
-    let vacancy = props.vacancies.map((e) => {
-        return (
-            <div className={s.card} key={e.id} id={e.id}>
-                <input type="checkbox"/>
-                <NavLink to={`/vacancies/${e.id}/`}>
-                    <div>{e.profession}</div>
-                </NavLink>
-                <div>{e.firmName}</div>
-                <div>{e.town}</div>
-                <div>{e.typeOfWork}</div>
-                {e.paymentFrom>0?(
-                    <div>зп от {e.paymentFrom} rub</div>
-                ):'зп не указана'}
 
-            </div>
-        )
-    })
+function SearchVacancies() {
+
+    const getVacancies = async (url) => {
+        const res = await getApi(url)
+        console.log("search:",res);
+
+    }
+
+    useEffect(() => {
+        getVacancies(URL + URLVacancies + id)
+    }, [])
+    
+
     return (
-        <>
-            {vacancy}
-        </>
+            <form action="">
+                <input type="text"/>
+                <input type="submit"/>
+            </form>
     )
 }
-export default VacanciesList;
+export default SearchVacancies;

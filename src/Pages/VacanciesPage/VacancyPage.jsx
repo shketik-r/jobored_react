@@ -1,46 +1,44 @@
 import s from './VacancyPage.module.css'
 import {useEffect, useState} from "react";
-import axios from "axios";
-import {client_secret, token} from "../../App";
-
+import {useParams} from 'react-router';
+import {getApi} from "../../utils/network";
+import {URL, URLVacancies} from "../../constans/apiConstants";
 
 function VacancyPage(props) {
-    const [vacancy, setVacancy] = useState({})
+    const [vacancyInfo, setVacancyInfo] = useState(null)
+    const id = useParams().id
+    const getVacancy = async (url) => {
+        const res = await getApi(url)
+        console.log("вакансия:",res);
+        setVacancyInfo(res.data);
+    }
 
     useEffect(() => {
-        let href = window.location.pathname;
-        axios.get(`https://startup-summer-2023-proxy.onrender.com/2.0${href}`, {
-            headers: {
-                "x-secret-key": "GEU4nvd3rej*jeh.eqp",
-                "X-Api-App-Id": client_secret,
-                "Authorization": token
-            }
-        })
-            .then(res => {
-                setVacancy(res.data)
-            })
+        getVacancy(URL + URLVacancies + id)
     }, [])
 
     function createMarkup() {
-        return {__html: vacancy.vacancyRichText};
+        return {__html: vacancyInfo.vacancyRichText};
     }
-
-    if (Object.keys(vacancy).length !== 0) {
         return (
-            <div>
-                <div className={s.card}>
-                    <div>{vacancy.profession}</div>
-                    <div>{vacancy.firm_name}</div>
-                    <div>{vacancy.town.title}</div>
-                    <div>{vacancy.type_of_work.title}</div>
-                    <div>зп от {vacancy.payment_from} rub</div>
-                </div>
-                <div className={s.card} dangerouslySetInnerHTML={createMarkup()}/>
-            </div>
+            <>
+                {vacancyInfo?(
+                    <div>
+                        <div className={s.card}>
+                            <div>{vacancyInfo.profession}</div>
+                            <div>{vacancyInfo.firm_name}</div>
+                            <div>{vacancyInfo.town.title}</div>
+                            <div>{vacancyInfo.type_of_work.title}</div>
+                            {vacancyInfo.payment_from>0?(
+                                <div>зп от {vacancyInfo.payment_from} rub</div>
+                            ):''}
+
+                        </div>
+                        <div className={s.card} dangerouslySetInnerHTML={createMarkup()}/>
+                    </div>
+                ):'loading'}
+            </>
         )
-    } else {
-        return "Loading"
-    }
 }
 
 export default VacancyPage;
