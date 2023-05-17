@@ -7,7 +7,7 @@
  export const client_id = 2356
  export const secretKey = "GEU4nvd3rej*jeh.eqp"
 
-//export const URL = `https://startup-summer-2023-proxy.onrender.com/2.0/oauth2/password/?login=${login}&password=${password}&client_id=${client_id}&client_secret=${client_secret}`
+export const URLA = `https://startup-summer-2023-proxy.onrender.com/2.0/oauth2/password/?login=${login}&password=${password}&client_id=${client_id}&client_secret=${client_secret}`
 
  export const URL = `https://startup-summer-2023-proxy.onrender.com/2.0/`
  export const URLVacancies = `vacancies/`

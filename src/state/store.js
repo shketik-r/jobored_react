@@ -1,53 +1,20 @@
-import {createStore} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
+import thunkMiddleware from "redux-thunk";
+import {filteredReducer} from "./filteredReduser";
+import {vacanciesReducer} from "./vacanciesReducer";
 
-
-
-const initialState = {
-    vacancies:null,
-    vacancyInfo:null,
-    paramsFilter:{
-        published:1,
-        keyword:'',
-        payment_from:'',
-        payment_to:'',
-        catalogues:''
-    }
-}
-
-const reducer = (state = initialState, action) => {
-    switch (action.type) {
-        case 'ADD_VACANCIES' :
-            return {
-        ...state, vacancies: action.payload
-            }
-        case 'ADD_VACANCY_INFO':
-            return {
-                ...state ,vacancyInfo: action.payload
-            }
-        case 'ADD_PARAMS_FILTER':
-            return {
-                ...state ,paramsFilter: action.payload
-            }
-        default:
-            return state
-    }
-}
-
-
-export const store = createStore(reducer)
-
-/*-----------action-----------------*/
-export const setVacancies = (vacancies) => ({
-    type: 'ADD_VACANCIES',
-    payload: vacancies
+const reducers = combineReducers({
+    vacancies: vacanciesReducer, filter: filteredReducer
 })
+export const store = createStore(reducers, applyMiddleware(thunkMiddleware))
 
-export const setVacancyInfo = (vacancyInfo) => ({
-    type: 'ADD_VACANCY_INFO',
-    payload: vacancyInfo
-})
 
-export const setParamsFilter = (params) => ({
-    type: 'ADD_PARAMS_FILTER',
-    payload: params
-})
+
+
+
+
+
+
+
+
+

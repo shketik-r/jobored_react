@@ -3,7 +3,7 @@ import './App.css';
 import {Route, Routes} from 'react-router-dom'
 import MainPage from "./Pages/MainPage/MainPage";
 import Header from "./components/Header/Head";
-import VacancyPage from "./Pages/VacanciesPage/VacancyPage";
+import VacancyInfoPage from "./Pages/VacanciesInfoPage/VacancyInfoPage";
 
 function App() {
     return (
@@ -11,7 +11,7 @@ function App() {
             <Header/>
             <Routes>
                 <Route path="/" element={<MainPage/>}/>
-                <Route path="/vacancies/:id" element={<VacancyPage/>}/>
+                <Route path="/vacancies/:id" element={<VacancyInfoPage/>}/>
             </Routes>
         </div>
     )

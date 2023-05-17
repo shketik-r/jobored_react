@@ -1,15 +1,17 @@
 import axios from "axios";
 import {client_secret, secretKey, token} from "../constans/apiConstants";
 
-export const getApi= async (url) => {
+export const getApi= async (url,params ) => {
     let res
     try {
         res = await axios.get(url, {
             headers: {
                 "x-secret-key": secretKey,
                 "X-Api-App-Id": client_secret,
-                "Authorization": `Bearer ${token}`
-            }
+                "Authorization": `Bearer ${token}`,
+            },
+            params
+
         })
         return res
     } catch (err) {
@@ -17,6 +19,7 @@ export const getApi= async (url) => {
         return false
     }
 }
+
 
 // useEffect(() => {
 //     axios.get(URL, {
