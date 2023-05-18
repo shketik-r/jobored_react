@@ -33,7 +33,7 @@ useEffect(()=>{
 
     return (
         <>
-            {favorite ? <button onClick={() => remove(id)}>delete</button> :
+            {favorite ? <button  onClick={() => remove(id)}>delete</button> :
                 <button onClick={() => add(obj)}>add</button>}
         </>
     )

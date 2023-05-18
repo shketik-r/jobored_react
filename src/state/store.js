@@ -6,7 +6,10 @@ import {cataloguesReducer} from "./cataloguesReduser";
 import {favoriteReducer} from "./favoriteReduser";
 
 const reducers = combineReducers({
-    vacancies: vacanciesReducer, filter: filteredReducer, catalogues: cataloguesReducer, favorite:favoriteReducer
+    vacancies: vacanciesReducer,
+    filter: filteredReducer,
+    catalogues: cataloguesReducer,
+    favorite:favoriteReducer
 })
 export const store = createStore(reducers, applyMiddleware(thunkMiddleware))
 

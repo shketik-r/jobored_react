@@ -1,27 +1,35 @@
 import axios from "axios";
-import {client_secret, secretKey, token, URLA} from "../constans/apiConstants";
-import {useEffect} from "react";
+import {client_secret, secretKey, token} from "../constans/apiConstants";
 
 
 
-export const getApi= async (url,params ) => {
-    let res
-    try {
-        res = await axios.get(url, {
-            headers: {
-                "x-secret-key": secretKey,
-                "X-Api-App-Id": client_secret,
-                "Authorization": `Bearer ${token}`,
-            },
-            params
 
-        })
-        return res
-    } catch (err) {
-        console.error(err.message)
-        return false
-    }
+const instance =  axios.create({
+        baseURL: `https://startup-summer-2023-proxy.onrender.com/2.0/`,
+        headers: {
+            "x-secret-key": "GEU4nvd3rej*jeh.eqp",
+            "X-Api-App-Id": client_secret,
+            "Authorization": `Bearer ${token}`
+        }
+    })
+
+
+export const getApiVacancies=  (params ) => {
+   return  instance.get("vacancies/", {params})
 }
+
+export const getApiInfo=  (id) => {
+    return  instance.get(`vacancies/${id}/`)
+}
+
+
+export const getApiCatalogues=  () => {
+    return  instance.get(`catalogues/`)
+}
+
+
+
+
 
 
 

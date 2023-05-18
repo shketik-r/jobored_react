@@ -1,7 +1,7 @@
 import React, {useEffect} from "react";
 
 import s from './FilterVacancies.module.css'
-import {getApi} from "../../utils/network";
+import {getApi, getApiVacancies} from "../../utils/network";
 import {useState} from "react";
 import {URL, URLVacancies} from "../../constans/apiConstants";
 import {
@@ -22,22 +22,22 @@ function FilterVacancies({setPages}) {
     const storeFilter = useSelector(state => state.filter)
     const storeCatalogues = useSelector(state => state.catalogues.catalogues)
 
-    const getSearch = async (url) => {
-        const params = new URLSearchParams();
-        params.append('published', storeFilter.published);
-        params.append('payment_from', storeFilter.payment_from);
-        params.append('payment_to', storeFilter.payment_to);
-        params.append('catalogues', storeFilter.catalogues);
-        params.append('count', 4);
-
-        const res = await getApi(url, params)
-
-        const total = res.data.total
-        total >= 500 ? setPages(125) : setPages(Math.ceil(total / 4))
-
-        const objectsVacancies = res.data.objects.map(obj => obj)
-        dispatch(setVacanciesAC(objectsVacancies))
-    }
+    // const getSearch = async (url) => {
+    //     const params = new URLSearchParams();
+    //     params.append('published', storeFilter.published);
+    //     params.append('payment_from', storeFilter.payment_from);
+    //     params.append('payment_to', storeFilter.payment_to);
+    //     params.append('catalogues', storeFilter.catalogues);
+    //     params.append('count', 4);
+    //
+    //     const res = await getApi(url, params)
+    //
+    //     const total = res.data.total
+    //     total >= 500 ? setPages(125) : setPages(Math.ceil(total / 4))
+    //
+    //     const objectsVacancies = res.data.objects.map(obj => obj)
+    //     dispatch(setVacanciesAC(objectsVacancies))
+    // }
 
 
     useEffect(() => {
@@ -48,23 +48,38 @@ function FilterVacancies({setPages}) {
 
     const handleUploadFile = (event) => {
         event.preventDefault();
-        getSearch(URL + URLVacancies)
+        const params = new URLSearchParams();
+        params.append('published', storeFilter.published);
+        params.append('payment_from', storeFilter.payment_from);
+        params.append('payment_to', storeFilter.payment_to);
+        params.append('catalogues', storeFilter.catalogues);
+        params.append('count', 4);
+        getApiVacancies(params).then(res=>{
+            const total = res.data.total
+            total >= 500 ? setPages(125) : setPages(Math.ceil(total / 4))
+            dispatch(setVacanciesAC(res.data.objects))
+        })
     };
 
     /*-----------------------------*/
 
 const catalog = storeCatalogues.map(e=>{
-
     return (
         <option key={e.key} value={e.key} >{e.title}</option>
     )
-
 })
 const deleteAll = () => {
     setCatalogues('')
     setPaymentFrom('')
     setPaymentTo('')
-    getSearch(URL + URLVacancies)
+    const params = new URLSearchParams();
+    params.append('count', 4);
+    getApiVacancies(params)
+        .then(res=>{
+        const total = res.data.total
+        total >= 500 ? setPages(125) : setPages(Math.ceil(total / 4))
+        dispatch(setVacanciesAC(res.data.objects))
+    })
 }
     return (
         <>
