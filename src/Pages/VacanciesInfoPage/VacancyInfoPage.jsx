@@ -1,5 +1,5 @@
 import s from './VacancyInfoPage.module.css'
-import {useEffect} from "react";
+import React, {useEffect} from "react";
 import {useParams} from 'react-router';
 import {getApi, getApiInfo} from "../../utils/network";
 import {URL, URLVacancies} from "../../constans/apiConstants";
@@ -7,6 +7,7 @@ import {setVacancyInfoAC} from "../../state/vacanciesReducer";
 import {useDispatch, useSelector} from "react-redux";
 import VacanciesList from "../../components/VacanciesList/VacanciesList";
 import Info from "../../components/Info/Info";
+import {Loader} from "@mantine/core";
 
 function VacancyInfoPage() {
 
@@ -42,7 +43,7 @@ function VacancyInfoPage() {
                     />
 
                 </div>
-            ) : 'loading'}
+            ) :  <Loader/>}
         </>
     )
 }

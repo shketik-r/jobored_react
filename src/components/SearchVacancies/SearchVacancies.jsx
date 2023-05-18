@@ -57,10 +57,10 @@ function SearchVacancies({setPages}) {
 
     return (
         <form action=""  onSubmit={handleUploadFile} >
-            <input type="text" value={keyWord} onChange={(e) =>
+            <input data-elem="search-input" type="text" value={keyWord} onChange={(e) =>
                 setKeyWord(e.target.value)
             }/>
-            <input type="submit"/>
+            <input data-elem="search-button" type="submit"/>
         </form>
     )
 }

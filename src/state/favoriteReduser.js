@@ -1,8 +1,9 @@
-
+import {getLocalStorage} from "../utils/localStorage";
 
 const initialState = {
-    favorite: []
+    favorite: getLocalStorage('store')
 }
+
 export const favoriteReducer = (state = initialState, action) => {
 
 
@@ -31,3 +32,5 @@ export const deleteFavoriteAC = (params) => ({
     type: 'DELETE_FAVORITE',
     payload: params
 })
+
+

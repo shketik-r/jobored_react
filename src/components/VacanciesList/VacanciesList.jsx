@@ -11,7 +11,7 @@ function VacanciesList({vacancies}) {
     let vacancy = vacancies.map((e) => {
 
         return (
-            <div className={s.card} key={e.id} id={e.id}>
+            <div data-elem={`vacancy-${e.id}`} className={s.card} key={e.id}>
                 <Check
                 obj={e}
                 id={e.id}

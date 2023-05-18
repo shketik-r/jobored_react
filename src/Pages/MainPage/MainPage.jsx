@@ -7,6 +7,7 @@ import {useSelector, useDispatch} from "react-redux";
 import {setVacanciesAC} from "../../state/vacanciesReducer";
 import FilterVacancies from "../../components/FilterVacancies/FilterVacancies";
 import ReactPaginate from "react-paginate";
+import {Loader} from "@mantine/core";
 
 
 const MainPage = () => {
@@ -68,7 +69,7 @@ const MainPage = () => {
                     // activeClassName={}
                 />
 
-            </div>) : 'Loading'}
+            </div>) : <Loader/>}
         </>
     )
 }

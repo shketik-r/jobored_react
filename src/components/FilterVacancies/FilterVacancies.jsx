@@ -11,6 +11,10 @@ import {
 } from "../../state/filteredReduser";
 import {setVacanciesAC} from "../../state/vacanciesReducer";
 import {useDispatch, useSelector} from "react-redux";
+import {TextInput, Checkbox, Button, Group, Box, rem, MantineProvider, NumberInput,} from '@mantine/core';
+import {useForm} from '@mantine/form';
+
+
 
 function FilterVacancies({setPages}) {
 
@@ -54,7 +58,7 @@ function FilterVacancies({setPages}) {
         params.append('payment_to', storeFilter.payment_to);
         params.append('catalogues', storeFilter.catalogues);
         params.append('count', 4);
-        getApiVacancies(params).then(res=>{
+        getApiVacancies(params).then(res => {
             const total = res.data.total
             total >= 500 ? setPages(125) : setPages(Math.ceil(total / 4))
             dispatch(setVacanciesAC(res.data.objects))
@@ -63,44 +67,83 @@ function FilterVacancies({setPages}) {
 
     /*-----------------------------*/
 
-const catalog = storeCatalogues.map(e=>{
-    return (
-        <option key={e.key} value={e.key} >{e.title}</option>
-    )
-})
-const deleteAll = () => {
-    setCatalogues('')
-    setPaymentFrom('')
-    setPaymentTo('')
-    const params = new URLSearchParams();
-    params.append('count', 4);
-    getApiVacancies(params)
-        .then(res=>{
-        const total = res.data.total
-        total >= 500 ? setPages(125) : setPages(Math.ceil(total / 4))
-        dispatch(setVacanciesAC(res.data.objects))
+    const catalog = storeCatalogues.map(e => {
+        return (
+            <option key={e.key} value={e.key}>{e.title}</option>
+        )
     })
-}
+    const deleteAll = () => {
+        setCatalogues('')
+        setPaymentFrom('')
+        setPaymentTo('')
+        const params = new URLSearchParams();
+        params.append('count', 4);
+        getApiVacancies(params)
+            .then(res => {
+                const total = res.data.total
+                total >= 500 ? setPages(125) : setPages(Math.ceil(total / 4))
+                dispatch(setVacanciesAC(res.data.objects))
+            })
+    }
+
+
+    const form = useForm({
+        initialValues: {
+            paymentFrom: '',
+            paymentTo: ''
+        }
+    });
+
     return (
         <>
+            < MantineProvider>
+
+                <Box maw={300} mx="auto">
+                    <form onSubmit={form.onSubmit((values) => console.log(values))}>
+
+
+                            <NumberInput
+                                label="Оклад"
+                                data-elem="salary-from-input"
+                                radius="md"
+                                type="number"
+                            />
+                            <NumberInput
+                                data-elem="salary-to-input"
+                                type="number"
+                                radius="md"
+
+                            />
+
+
+
+                        <Group position="center" mt="md">
+                            <Button compact radius="md" size="xl" type="submit">Применить</Button>
+                        </Group>
+                    </form>
+                </Box>
+
+            </MantineProvider>
+
+
             <form action="" onSubmit={handleUploadFile}>
                 <span onClick={deleteAll}> очистить все</span>
                 <span>Отрасль</span>
 
-                <select  onChange={(event) => setCatalogues(event.target.value)} >
+                <select data-elem="industry-select" onChange={(event) => setCatalogues(event.target.value)}>
                     {catalog}
                 </select>
 
                 <span>Оклад</span>
 
-                <input type="number" value={paymentFrom} onChange={(e) =>
+                <input data-elem="salary-from-input" type="number" value={paymentFrom} onChange={(e) =>
                     setPaymentFrom(e.target.value)
                 }/>
 
-                <input type="number" value={paymentTo} onChange={(e) =>
+                <input data-elem="salary-to-input" type="number" value={paymentTo} onChange={(e) =>
                     setPaymentTo(e.target.value)
                 }/>
-                <input type="submit"/>
+                <input data-elem="search-button" type="submit"/>
             </form>
         </>
     )
