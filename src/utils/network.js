@@ -1,5 +1,8 @@
 import axios from "axios";
-import {client_secret, secretKey, token} from "../constans/apiConstants";
+import {client_secret, secretKey, token, URLA} from "../constans/apiConstants";
+import {useEffect} from "react";
+
+
 
 export const getApi= async (url,params ) => {
     let res
@@ -21,6 +24,7 @@ export const getApi= async (url,params ) => {
 }
 
 
+
 // useEffect(() => {
 //     axios.get(URL, {
 //         headers: {
@@ -31,3 +35,5 @@ export const getApi= async (url,params ) => {
 //             console.log("Authorization", res.data);
 //         })
 // }, [])
+
+

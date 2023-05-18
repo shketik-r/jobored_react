@@ -12,7 +12,7 @@ import {
 import {setVacanciesAC} from "../../state/vacanciesReducer";
 import {useDispatch, useSelector} from "react-redux";
 
-function FilterVacancies(props) {
+function FilterVacancies({setPages}) {
 
     const [catalogues, setCatalogues] = useState(``);
     const [paymentFrom, setPaymentFrom] = useState(``);
@@ -20,6 +20,7 @@ function FilterVacancies(props) {
 
     const dispatch = useDispatch()
     const storeFilter = useSelector(state => state.filter)
+    const storeCatalogues = useSelector(state => state.catalogues.catalogues)
 
     const getSearch = async (url) => {
         const params = new URLSearchParams();
@@ -32,24 +33,9 @@ function FilterVacancies(props) {
         const res = await getApi(url, params)
 
         const total = res.data.total
-        if (total >= 500) {
-            props.setPages(125)
-        } else {
-            props.setPages(Math.ceil(total / 4))
-        }
+        total >= 500 ? setPages(125) : setPages(Math.ceil(total / 4))
 
-
-
-        const objectsVacancies = res.data.objects.map((e) => {
-            return {
-                profession: e.profession,
-                firmName: e.firm_name,
-                town: e.town.title,
-                typeOfWork: e.type_of_work.title,
-                paymentFrom: e.payment_from,
-                id: e.id
-            }
-        })
+        const objectsVacancies = res.data.objects.map(obj => obj)
         dispatch(setVacanciesAC(objectsVacancies))
     }
 
@@ -67,14 +53,28 @@ function FilterVacancies(props) {
 
     /*-----------------------------*/
 
+const catalog = storeCatalogues.map(e=>{
+
+    return (
+        <option key={e.key} value={e.key} >{e.title}</option>
+    )
+
+})
+const deleteAll = () => {
+    setCatalogues('')
+    setPaymentFrom('')
+    setPaymentTo('')
+    getSearch(URL + URLVacancies)
+}
     return (
         <>
             <form action="" onSubmit={handleUploadFile}>
+                <span onClick={deleteAll}> очистить все</span>
                 <span>Отрасль</span>
 
-                <input type="text" value={catalogues} onChange={(e) =>
-                    setCatalogues(e.target.value)
-                }/>
+                <select  onChange={(event) => setCatalogues(event.target.value)} >
+                    {catalog}
+                </select>
 
                 <span>Оклад</span>
 

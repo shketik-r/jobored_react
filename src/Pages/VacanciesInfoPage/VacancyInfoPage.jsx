@@ -5,6 +5,8 @@ import {getApi} from "../../utils/network";
 import {URL, URLVacancies} from "../../constans/apiConstants";
 import {setVacancyInfoAC} from "../../state/vacanciesReducer";
 import {useDispatch, useSelector} from "react-redux";
+import VacanciesList from "../../components/VacanciesList/VacanciesList";
+import Info from "../../components/Info/Info";
 
 function VacancyInfoPage() {
 
@@ -12,33 +14,29 @@ function VacancyInfoPage() {
     const storeVacancyInfo = useSelector(state => state.vacancies.vacancyInfo)
 
     const id = useParams().id
-    const getVacancy = async (url) => {
-        const res = await getApi(url)
-        dispatch(setVacancyInfoAC(res.data));
+    const getVacancyInfo = async (url) => {
+        const params = new URLSearchParams();
+        const res = await getApi(url,params)
+        dispatch(setVacancyInfoAC([res.data]));
     }
 
     useEffect(() => {
-        getVacancy(URL + URLVacancies + id)
+        getVacancyInfo(URL + URLVacancies + id)
     }, [])
 
-    function createMarkup() {
-        return {__html: storeVacancyInfo.vacancyRichText};
-    }
 
     return (
         <>
-            {storeVacancyInfo ? (
+            {storeVacancyInfo? (
+
                 <div>
-                    <div className={s.card}>
-                        <div>{storeVacancyInfo.profession}</div>
-                        <div>{storeVacancyInfo.firm_name}</div>
-                        <div>{storeVacancyInfo.town.title}</div>
-                        <div>{storeVacancyInfo.type_of_work.title}</div>
-                        {storeVacancyInfo.payment_from > 0 ? (
-                            <div>зп от {storeVacancyInfo.payment_from} rub</div>
-                        ) : ''}
-                    </div>
-                    <div className={s.card} dangerouslySetInnerHTML={createMarkup()}/>
+                    <VacanciesList
+                        vacancies={storeVacancyInfo}
+                    />
+                    <Info
+                        info={storeVacancyInfo}
+                    />
+
                 </div>
             ) : 'loading'}
         </>

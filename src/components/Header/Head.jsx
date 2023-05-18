@@ -4,7 +4,7 @@ import {NavLink} from "react-router-dom";
 function Header() {
     return (
         <div className={s.header}>
-            <NavLink to={`/`} >
+            <NavLink to={`/`}>
                 <div className={s.wrapper_logo}>
                     <div className={s.logo}>
                         <div className={s.ellipse_1}></div>
@@ -13,10 +13,12 @@ function Header() {
                     <span>Jobored</span>
                 </div>
             </NavLink>
-
-
             <a href="#">Поиск Вакансий</a>
-            <a href="#">Избранное</a>
+            <NavLink to={'/favorites'}>
+                <span>Избранное</span>
+            </NavLink>
+
+
         </div>
     )
 

@@ -7,7 +7,7 @@ import {setVacanciesAC} from "../../state/vacanciesReducer";
 import {useDispatch, useSelector} from "react-redux";
 import {setParamsKeyWordAC} from "../../state/filteredReduser";
 
-function SearchVacancies(props) {
+function SearchVacancies({setPages}) {
 
     const [keyWord, setKeyWord] = useState(``)
 
@@ -28,22 +28,9 @@ function SearchVacancies(props) {
 
 
         const total = res.data.total
-        if (total >= 500) {
-            props.setPages(125)
-        } else {
-            props.setPages(Math.ceil(total / 4))
-        }
+        total >= 500 ? setPages(125) : setPages(Math.ceil(total / 4))
 
-        const objectsVacancies = res.data.objects.map((e) => {
-            return {
-                profession: e.profession,
-                firmName: e.firm_name,
-                town: e.town.title,
-                typeOfWork: e.type_of_work.title,
-                paymentFrom: e.payment_from,
-                id: e.id
-            }
-        })
+        const objectsVacancies = res.data.objects.map(obj => obj)
         dispatch(setVacanciesAC(objectsVacancies))
     }
 

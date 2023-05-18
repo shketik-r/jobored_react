@@ -1,50 +1,42 @@
-import s from './VacanciesList.module.css'
-import {NavLink} from "react-router-dom";
-import {useState} from "react";
+
+import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {addFavoriteAC, deleteFavoriteAC} from "../../state/favoriteReduser";
+import {addFavoriteAC, deleteFavoriteAC} from "../../../state/favoriteReduser";
 
 
-function VacanciesList({vacancies}) {
+function Check({obj,id}) {
 
     const [favorite, setFavorite] = useState(false)
 
     const storeFavorite = useSelector(state => state.favorite.favorite)
+
+useEffect(()=>{
+    for (let i = 0; i < storeFavorite.length; i++) {
+        if(storeFavorite[i].id===id){
+            setFavorite(true)
+        }
+    }
+},[])
+
 
 
     const dispatch = useDispatch()
 
     const add = (obj) => {
         dispatch(addFavoriteAC(obj))
+        setFavorite(true)
     }
     const remove = (id) => {
         dispatch(deleteFavoriteAC(id))
+        setFavorite(false)
     }
-
-    let vacancy = vacancies.map((e) => {
-
-        return (
-            <div className={s.card} key={e.id} id={e.id}>
-                {favorite ? <button onClick={() => remove(e.id)}>delete</button> :
-                    <button onClick={() => add(e)}>add</button>}
-                <NavLink to={`/vacancies/${e.id}/`}>
-                    <div>{e.profession}</div>
-                </NavLink>
-                <div>{e.firm_name}</div>
-                <div>{e.town.title}</div>
-                <div>{e.type_of_work.title}</div>
-                {e.payment_from > 0 ? (
-                    <div>зп от {e.payment_from} {e.currency}</div>
-                ) : 'зп не указана'}
-            </div>
-        )
-    })
 
     return (
         <>
-            {vacancy}
+            {favorite ? <button onClick={() => remove(id)}>delete</button> :
+                <button onClick={() => add(obj)}>add</button>}
         </>
     )
 }
 
-export default VacanciesList;
+export default Check;

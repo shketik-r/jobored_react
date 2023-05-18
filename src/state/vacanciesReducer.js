@@ -18,7 +18,7 @@ export const vacanciesReducer = (state = initialState, action) => {
     }
 }
 
-
+// /vacancies/46371595/
 /*-----------action-----------------*/
 export const setVacanciesAC = (vacancies) => ({
     type: 'ADD_VACANCIES',
