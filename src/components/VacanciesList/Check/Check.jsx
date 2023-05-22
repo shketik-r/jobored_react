@@ -1,4 +1,3 @@
-
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {addFavoriteAC, deleteFavoriteAC} from "../../../state/favoriteReduser";
@@ -7,13 +6,12 @@ import iconStarOff from "../svg/starOff.svg"
 function Check({obj,id}) {
 
     const [favorite, setFavorite] = useState(false)
-
     const storeFavorite = useSelector(state => state.favorite.favorite)
 
 useEffect(()=>{
     for (let i = 0; i < storeFavorite.length; i++) {
         if(storeFavorite[i].id===id){
-         return    setFavorite(true)
+         return setFavorite(true)
         }
     }
 },[])

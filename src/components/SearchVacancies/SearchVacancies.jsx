@@ -11,7 +11,7 @@ import { CiSearch } from "react-icons/ci";
 function SearchVacancies({ setPages }) {
   const dispatch = useDispatch();
   const storeFilter = useSelector((state) => state.filter);
-
+  
   const handleUploadFile = (values) => {
     dispatch(setParamsKeyWordAC(values.keyWord));
     const params = new URLSearchParams();
@@ -25,7 +25,7 @@ function SearchVacancies({ setPages }) {
       const total = res.data.total;
       total >= 500 ? setPages(125) : setPages(Math.ceil(total / 4));
       dispatch(setVacanciesAC(res.data.objects));
-    });
+    })
   };
   const form = useForm({
     initialValues: {

@@ -1,13 +1,10 @@
 import s from "./VacanciesList.module.css";
-import { NavLink } from "react-router-dom";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { addFavoriteAC, deleteFavoriteAC } from "../../state/favoriteReduser";
+import { NavLink  } from "react-router-dom";
 import Check from "./Check/Check";
 import { Box, Card, Text } from "@mantine/core";
 import { HiOutlineLocationMarker } from "react-icons/hi";
 
-function VacanciesList({ vacancies }) {
+function VacanciesList({ vacancies, link }) {
   let vacancy = vacancies.map((e) => {
     return (
       <Card
@@ -28,7 +25,11 @@ function VacanciesList({ vacancies }) {
             marginBottom: "0.76rem",
           })}
         >
-          <NavLink to={`/vacancies/${e.id}/`}>{e.profession}</NavLink>
+          {link === true ? (
+            <NavLink to={`/vacancies/${e.id}/`}>{e.profession}</NavLink>
+          ) : (
+            <p className={s.title}>{e.profession}</p>
+          )}
           <Check obj={e} id={e.id} />
         </Box>
         <Box
@@ -36,6 +37,7 @@ function VacanciesList({ vacancies }) {
             display: "flex",
             justifyContent: "flex-start",
             flexDirection: "row",
+            flexWrap: "wrap",
             alignItems: "center",
             fontSize: " 1.25rem",
             lineHeight: "1.25rem",
@@ -43,24 +45,37 @@ function VacanciesList({ vacancies }) {
             marginBottom: "0.76rem",
           })}
         >
-          <span
-            className={s.payment}
-          >{`зп от ${e.payment_from} ${e.currency}`}</span>{" "}
-          <span className={s.dot}></span> <span>{e.type_of_work.title}</span>
+          <span className={s.payment}>
+            {e.payment_from === 0 && e.payment_to === 0
+              ? "з/п не указана"
+              : false}
+            {e.payment_from === 0 && e.payment_to > 0
+              ? `з/п ${e.payment_to}  ${e.currency}`
+              : false}
+            {e.payment_from > 0 && e.payment_to > 0
+              ? `з/п ${e.payment_from} - ${e.payment_to}  ${e.currency}`
+              : false}
+            {e.payment_from > 0 && e.payment_to === 0
+              ? `з/п от ${e.payment_from}   ${e.currency}`
+              : false}
+          </span>
+          <span className={s.dot}></span>{" "}
+          <span className={s.work_title}>{e.type_of_work.title}</span>
         </Box>
         <Box
-              sx={() => ({
-                display: "flex",
-                justifyContent: "flex-start",
-                flexDirection: "row",
-                alignItems: "center",
-                fontSize: " 1rem",
-                lineHeight: "1.25rem",
-                color: "#232134",
-                marginBottom: "0.76rem",
-              })}
+          sx={() => ({
+            display: "flex",
+            justifyContent: "flex-start",
+            flexDirection: "row",
+            alignItems: "center",
+            fontSize: " 1rem",
+            lineHeight: "1.25rem",
+            color: "#232134",
+            marginBottom: "0.76rem",
+          })}
         >
-          <HiOutlineLocationMarker color="#ACADB9" /> <span className={s.name_town}>{e.town.title}</span>
+          <HiOutlineLocationMarker color="#ACADB9" />{" "}
+          <span className={s.name_town}>{e.town.title}</span>
         </Box>
       </Card>
     );

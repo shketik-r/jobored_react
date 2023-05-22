@@ -1,16 +1,37 @@
 .payment {
   font-weight: 700;
-  
 }
 
-.dot{
-background-color:  #7B7C88;
-border: 2px solid #7B7C88;
-border-radius: 50px;
-width: 0;
-height: 0;
-margin-left: 0.75rem;
-margin-right: 0.75rem;
-
-
+.dot {
+  background-color: #7b7c88;
+  border: 2px solid #7b7c88;
+  border-radius: 50px;
+  width: 0;
+  height: 0;
+  margin-left: 0.75rem;
+  margin-right: 0.75rem;
 }
+
+.name_town {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 140%;
+  margin-left: 0.68rem;
+}
+.title{
+  font-weight: 700;
+font-size: 1.75rem;
+line-height: 2.125rem;
+}
+
+/*---------------560px----------------*/
+
+@media screen and (max-width: 560px) {
+    .dot{
+display: none;
+    }
+    .payment{
+        margin-right: 3rem;
+        margin-bottom: 0.2rem;
+    }
+  }

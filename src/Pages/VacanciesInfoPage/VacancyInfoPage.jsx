@@ -1,8 +1,7 @@
 import s from "./VacancyInfoPage.module.css";
-import React, { useEffect,useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
-import { getApi, getApiInfo } from "../../utils/network";
-import { URL, URLVacancies } from "../../constans/apiConstants";
+import { getApiInfo } from "../../utils/network";
 import { setVacancyInfoAC } from "../../state/vacanciesReducer";
 import { useDispatch, useSelector } from "react-redux";
 import VacanciesList from "../../components/VacanciesList/VacanciesList";
@@ -15,6 +14,7 @@ function VacancyInfoPage() {
   const storeVacancyInfo = useSelector((state) => state.vacancies.vacancyInfo);
   const id = useParams().id;
   useEffect(() => {
+    setLoading(false);
     getApiInfo(id)
       .then((res) => {
         dispatch(setVacancyInfoAC([res.data]));
@@ -23,13 +23,14 @@ function VacancyInfoPage() {
         setLoading(true);
       });
   }, []);
-
+console.log(storeVacancyInfo)
   return (
     <>
       {loading ? (
         <div>
-          <VacanciesList vacancies={storeVacancyInfo} />
-          <Info info={storeVacancyInfo} />
+          <VacanciesList vacancies={storeVacancyInfo}
+          link={false} />
+{storeVacancyInfo[0].vacancyRichText!==null? <Info info={storeVacancyInfo} />: false}
         </div>
       ) : (
         <div className={s.loader}>

@@ -1,0 +1,25 @@
+.wrapper {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.wrapper p {
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.81rem;
+  color: #343a40;
+  margin-top: 1rem ;
+  margin-bottom: 1.5rem;
+}
+
+.img {
+  width: 90%;
+}
+
+
+.wrapper a {
+   
+  }

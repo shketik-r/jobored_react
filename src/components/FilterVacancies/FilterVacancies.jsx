@@ -1,5 +1,5 @@
 import s from "./FilterVacancies.module.css";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { getApiVacancies } from "../../utils/network";
 import { setFilterAC } from "../../state/filteredReduser";
 import { setVacanciesAC } from "../../state/vacanciesReducer";
@@ -8,24 +8,22 @@ import {
   Box,
   Button,
   Group,
-  MantineProvider,
   NumberInput,
   rem,
   Select,
-  Text,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { IconChevronDown, IconDatabase } from "@tabler/icons-react";
+import { IconChevronDown } from "@tabler/icons-react";
 import { AiOutlineClose } from "react-icons/ai";
+import { Navigate } from "react-router-dom";
 
 function FilterVacancies({ setPages }) {
   const dispatch = useDispatch();
   const storeFilter = useSelector((state) => state.filter);
   const storeCatalogues = useSelector((state) => state.catalogues.catalogues);
-
+  
   const handleUploadFile = (value) => {
     dispatch(setFilterAC(value));
-    console.log(storeFilter);
     const params = new URLSearchParams();
     params.append("published", storeFilter.published);
     params.append("payment_from", value.paymentFrom);
@@ -33,11 +31,12 @@ function FilterVacancies({ setPages }) {
     params.append("catalogues", value.catalogues);
     params.append("keyword", storeFilter.keyword);
     params.append("count", 4);
-    getApiVacancies(params).then((res) => {
-      const total = res.data.total;
-      total >= 500 ? setPages(125) : setPages(Math.ceil(total / 4));
-      dispatch(setVacanciesAC(res.data.objects));
-    });
+    getApiVacancies(params)
+      .then((res) => {
+        const total = res.data.total;
+        total >= 500 ? setPages(125) : setPages(Math.ceil(total / 4));
+        dispatch(setVacanciesAC(res.data.objects));
+      })
   };
 
   const option = storeCatalogues.map((e) => {
@@ -65,8 +64,11 @@ function FilterVacancies({ setPages }) {
   };
 
   return (
-    <Box maw={773} mx="auto" mb="1.5rem"  >
-      <form className={s.wrapper} onSubmit={form.onSubmit((values) => handleUploadFile(values))}>
+    <Box maw={773} mx="auto" mb="1.5rem">
+      <form
+        className={s.wrapper}
+        onSubmit={form.onSubmit((values) => handleUploadFile(values))}
+      >
         <div className={s.wrapper_title}>
           <span className={s.title}>Фильтры</span>
           <div className={s.btn_close} onClick={deleteAll}>
@@ -75,6 +77,7 @@ function FilterVacancies({ setPages }) {
           </div>
         </div>
         <Select
+          data-elem="industry-select"
           label="Отрасль"
           placeholder="Выберете отрасль"
           radius="0.5rem"
@@ -106,11 +109,19 @@ function FilterVacancies({ setPages }) {
           {...form.getInputProps("paymentTo")}
         />
         <Group position="center" mt="md">
-          <Button compact radius="0.5rem" size={rem(14)} type="submit"  fullWidth styles={() => ({
-          root: {
-            height: rem(40),
-          }
-        })}>
+          <Button
+            data-elem="search-button"
+            compact
+            radius="0.5rem"
+            size={rem(14)}
+            type="submit"
+            fullWidth
+            styles={() => ({
+              root: {
+                height: rem(40),
+              },
+            })}
+          >
             Применить
           </Button>
         </Group>

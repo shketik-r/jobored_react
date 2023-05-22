@@ -1,5 +1,6 @@
 import s from "./MainPage.module.css";
 import React, { useState, useEffect } from "react";
+import { Navigate } from "react-router-dom";
 import { getApiVacancies } from "../../utils/network";
 import VacanciesList from "../../components/VacanciesList/VacanciesList";
 import SearchVacancies from "../../components/SearchVacancies/SearchVacancies";
@@ -16,7 +17,6 @@ const MainPage = () => {
   const dispatch = useDispatch();
   const storeVacancies = useSelector((state) => state.vacancies.vacancies);
   const storeFilter = useSelector((state) => state.filter);
-
   useEffect(() => {
     const params = new URLSearchParams();
     params.append("keyword", storeFilter.keyword);
@@ -27,20 +27,27 @@ const MainPage = () => {
     params.append("count", 4);
     params.append("page", currentPage);
 
-    getApiVacancies(params).then((res) => {
-        setLoading(false)
-      const total = res.data.total;
-      total >= 500 ? setPages(125) : setPages(Math.ceil(total / 4));
-      dispatch(setVacanciesAC(res.data.objects));
-    }).finally(()=>{
-        setLoading(true)
-    });
+    getApiVacancies(params)
+      .then((res) => {
+        setLoading(false);
+        const total = res.data.total;
+        total >= 500 ? setPages(125) : setPages(Math.ceil(total / 4));
+        dispatch(setVacanciesAC(res.data.objects));
+      })
+      .finally(() => {
+        setLoading(true);
+        if (storeVacancies===null) {
+          console.log(storeVacancies)
+          return <Navigate to="/empty" />;
+        }
+      });
   }, [currentPage]);
 
   const handlePageClick = (e) => {
     setCurrentPage(e - 1);
   };
 
+ 
   return (
     <div className={s.wrapper}>
       <FilterVacancies setPages={setPages} />
@@ -49,7 +56,7 @@ const MainPage = () => {
         <SearchVacancies setPages={setPages} />
         {loading ? (
           <div className={s.wrapper_list}>
-            <VacanciesList vacancies={storeVacancies} />
+            <VacanciesList vacancies={storeVacancies} link={true} />
             <Pagination
               total={pages}
               onChange={handlePageClick}
