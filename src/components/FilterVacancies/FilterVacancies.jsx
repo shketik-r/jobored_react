@@ -65,7 +65,7 @@ function FilterVacancies({ setPages }) {
   };
 
   return (
-    <Box maw={773} mx="auto" mb="1.5rem" >
+    <Box maw={773} mx="auto" mb="1.5rem"  >
       <form className={s.wrapper} onSubmit={form.onSubmit((values) => handleUploadFile(values))}>
         <div className={s.wrapper_title}>
           <span className={s.title}>Фильтры</span>
@@ -76,6 +76,7 @@ function FilterVacancies({ setPages }) {
         </div>
         <Select
           label="Отрасль"
+          placeholder="Выберете отрасль"
           radius="0.5rem"
           mb="1.25rem"
           rightSection={
@@ -92,6 +93,7 @@ function FilterVacancies({ setPages }) {
           data-elem="salary-from-input"
           radius="0.5rem"
           min={0}
+          placeholder="От"
           {...form.getInputProps("paymentFrom")}
         />
         <NumberInput
@@ -100,10 +102,15 @@ function FilterVacancies({ setPages }) {
           radius="0.5rem"
           mb="1.25rem"
           min={0}
+          placeholder="До"
           {...form.getInputProps("paymentTo")}
         />
         <Group position="center" mt="md">
-          <Button compact radius="0.5rem" size="xl" type="submit">
+          <Button compact radius="0.5rem" size={rem(14)} type="submit"  fullWidth styles={() => ({
+          root: {
+            height: rem(40),
+          }
+        })}>
             Применить
           </Button>
         </Group>

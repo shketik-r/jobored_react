@@ -7,12 +7,23 @@
 a {
     text-decoration:none;
 }
-.app{
-    display: flex;
+.App{
+    background: #F5F5F5;
+    min-height: 100vh;
 }
 
 .container{
     max-width: 69.75rem;
     margin: 2.5rem auto 0;
+}
+
+/*---------------1110----------------*/
+
+@media screen and (max-width: 1110px) {
+
+    .container{
+       
+        margin: 2.5rem 0.8rem;
+    }
 }
 

@@ -10,7 +10,7 @@ const FavoritesPage = () => {
 
     return (
         <>
-            <h1>Избранное</h1>
+         
             <VacanciesList
                 vacancies={storeFavorite}
             />

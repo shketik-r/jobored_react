@@ -1,5 +1,6 @@
 .wrapper{
 padding: 1.25rem;
+background-color: #fff;
 border: 1px solid #EAEBED;
 border-radius: 0.75rem;
 }
@@ -31,18 +32,10 @@ border-radius: 0.75rem;
 }
 
 
-/*---------------768px----------------*/
-/* 
-@media screen and (max-width: 768px) {
-  .container{
-    width: 540px;
-  }
-  header {
-    padding-top   : 40px;
-    padding-bottom: 60px;
-  }
-  .relaxation, .forms, footer{
-    padding: 60px 0;
-  }
 
-} */
+/*---------------768px----------------*/
+
+@media screen and (max-width: 768px) {
+
+
+}
