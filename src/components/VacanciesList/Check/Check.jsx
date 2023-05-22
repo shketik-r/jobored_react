@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {addFavoriteAC, deleteFavoriteAC} from "../../../state/favoriteReduser";
-import iconStarOn from "../svg/starOn.svg"
-import iconStarOff from "../svg/starOff.svg"
+import iconStarOn from "../../../svg/starOn.svg"
+import iconStarOff from "../../../svg//starOff.svg"
 function Check({obj,id}) {
 
     const [favorite, setFavorite] = useState(false)
