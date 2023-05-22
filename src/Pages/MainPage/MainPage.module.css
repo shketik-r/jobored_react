@@ -1,20 +1,16 @@
-.page{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
+.wrapper {
+  display: flex;
 }
 
-
-.wrapper{
-
-    display: flex;
-    justify-content: space-evenly;
+.loader{
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+/*--------------992-----------------------*/
+@media screen and (max-width: 992px) {
+  .wrapper {
     flex-wrap: wrap
-
+  }
+  
 }
-.wrapper_list{
-    width: 48.31rem;
-}
-
-

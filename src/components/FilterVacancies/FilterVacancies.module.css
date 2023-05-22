@@ -1,0 +1,48 @@
+.wrapper{
+padding: 1.25rem;
+border: 1px solid #EAEBED;
+border-radius: 0.75rem;
+}
+
+.wrapper_title {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.title {
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.25rem;
+}
+
+.btn_close {
+  display: flex;
+  align-items: center;
+  color: #acadb9;
+  font-weight: 500;
+  font-size: 0.87rem;
+  line-height:1.25rem;
+  margin-bottom: 2rem;
+  cursor: pointer;
+}
+
+.text_close {
+  margin-right: 0.56rem;
+}
+
+
+/*---------------768px----------------*/
+/* 
+@media screen and (max-width: 768px) {
+  .container{
+    width: 540px;
+  }
+  header {
+    padding-top   : 40px;
+    padding-bottom: 60px;
+  }
+  .relaxation, .forms, footer{
+    padding: 60px 0;
+  }
+
+} */

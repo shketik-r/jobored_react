@@ -1,48 +1,67 @@
 .header {
-    width: 100%;
-    height: 5.25rem;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding: 10px 162px;
-    gap: 308px;
+  width: 100%;
+  height: 5.25rem;
+  display: flex;
+}
+.container {
+  width: 69.75rem;
+  margin: 2rem auto;
+  position: relative;
 }
 
-.header a {
-    color: #232134;
+.a {
+  color: #232134;
+}
+.active {
+  color: #5e96fc;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  gap: 3.75rem;
 }
 
 .wrapper_logo {
-    display: flex;
-    align-items: center;
-}
-
-.wrapper_logo span {
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .logo {
-    margin-right: 0.47rem;
+  display: flex;
+  align-items: center;
 }
 
 .ellipse_1 {
-    position: relative;
-    width: 2.43rem;
-    height: 0.96rem;
-    border-radius: 100%;
-    background: #5E96FC;
-    left: 0;
-    top: 8px;
-    transform: rotate(-134.78deg);
+  position: relative;
+  width: 2.43rem;
+  height: 0.96rem;
+  border-radius: 100%;
+  background: #5e96fc;
+  left: 0;
+  top: 8px;
+  transform: rotate(-134.78deg);
 }
 
 .ellipse_2 {
-    position: relative;
-    width: 2.43rem;
-    height: 0.96rem;
-    border-radius: 100%;
-    background: #5E96FC;
-    left: 0;
-    top: -7px;
-    transform: rotate(-44.78deg);
+  position: relative;
+  width: 2.43rem;
+  height: 0.96rem;
+  border-radius: 100%;
+  background: #5e96fc;
+  left: 0;
+  top: -7px;
+  transform: rotate(-44.78deg);
 }
 
+/*---------------768px----------------*/
+
+@media screen and (max-width: 768px) {
+  .wrapper_logo {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+  }
+}

@@ -1,4 +1,18 @@
-.card{
-    width: 400px;
-    border: 1px solid gray;
+.text_info b {
+  display: block;
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.text_info ul {
+  margin-left: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.text_info li {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
 }

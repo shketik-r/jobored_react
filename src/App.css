@@ -7,6 +7,9 @@
 a {
     text-decoration:none;
 }
+.app{
+    display: flex;
+}
 
 .container{
     max-width: 69.75rem;
