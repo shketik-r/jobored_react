@@ -1,9 +1,11 @@
 const initialState = {
     published: 1,
     keyword: '',
-    payment_from: '',
-    payment_to: '',
-    catalogues: '',
+    filter:{
+        paymentFrom: '',
+        paymentTo: '',
+        catalogues: ''
+    },
     count: 500
 }
 export const filteredReducer = (state = initialState, action) => {
@@ -12,17 +14,9 @@ export const filteredReducer = (state = initialState, action) => {
             return {
                 ...state, keyword: action.payload
             }
-        case 'ADD_PARAMS_PAYMENT_FROM':
+        case 'ADD_FILTER':
             return {
-                ...state, payment_from: action.payload
-            }
-        case 'ADD_PARAMS_PAYMENT_TO':
-            return {
-                ...state, payment_to: action.payload
-            }
-        case 'ADD_PARAMS_CATALOGUES':
-            return {
-                ...state, catalogues: action.payload
+                ...state, filter: action.payload
             }
         default:
             return state
@@ -36,15 +30,8 @@ export const setParamsKeyWordAC = (params) => ({
     type: 'ADD_PARAMS_KEY_WORK',
     payload: params
 })
-export const setParamsPaymentFromAC = (params) => ({
-    type: 'ADD_PARAMS_PAYMENT_FROM',
-    payload: params
-})
-export const setParamsPaymentToAC = (params) => ({
-    type: 'ADD_PARAMS_PAYMENT_TO',
-    payload: params
-})
-export const setParamsCataloguesAC = (params) => ({
-    type: 'ADD_PARAMS_CATALOGUES',
+
+export const setFilterAC = (params) => ({
+    type: 'ADD_FILTER',
     payload: params
 })

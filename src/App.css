@@ -7,3 +7,9 @@
 a {
     text-decoration:none;
 }
+
+.container{
+    max-width: 69.75rem;
+    margin: 2.5rem auto 0;
+}
+

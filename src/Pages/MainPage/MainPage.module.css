@@ -5,3 +5,16 @@
     gap: 20px;
 }
 
+
+.wrapper{
+
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap
+
+}
+.wrapper_list{
+    width: 48.31rem;
+}
+
+

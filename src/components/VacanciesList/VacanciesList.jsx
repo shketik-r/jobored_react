@@ -4,6 +4,8 @@ import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {addFavoriteAC, deleteFavoriteAC} from "../../state/favoriteReduser";
 import Check from "./Check/Check";
+import {Box, Card, Text,} from "@mantine/core";
+import {HiOutlineLocationMarker} from "react-icons/hi";
 
 
 function VacanciesList({vacancies}) {
@@ -11,21 +13,40 @@ function VacanciesList({vacancies}) {
     let vacancy = vacancies.map((e) => {
 
         return (
-            <div data-elem={`vacancy-${e.id}`} className={s.card} key={e.id}>
-                <Check
-                obj={e}
-                id={e.id}
-                />
-                <NavLink to={`/vacancies/${e.id}/`}>
-                    <div>{e.profession}</div>
-                </NavLink>
-                <div>{e.firm_name}</div>
-                <div>{e.town.title}</div>
-                <div>{e.type_of_work.title}</div>
-                {e.payment_from > 0 ? (
-                    <div>зп от {e.payment_from} {e.currency}</div>
-                ) : 'зп не указана'}
-            </div>
+            <Card data-elem={`vacancy-${e.id}`}
+                  padding="md"
+                  radius="md"
+                  withBorder
+                  key={e.id}
+                  mb="1rem"
+            >
+                <Box
+                sx={(theme) => ({
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                })}
+                >
+                    <Text weight={500}>
+                        <NavLink to={`/vacancies/${e.id}/`}>
+                            {e.profession}
+                        </NavLink>
+                    </Text>
+                    <Check
+                        obj={e}
+                        id={e.id}
+                    />
+
+                </Box>
+
+
+                <Text>
+                    {`зп от ${e.payment_from} ${e.currency}`} {e.type_of_work.title}
+                </Text>
+                <Text>
+                   <HiOutlineLocationMarker /> {e.town.title}
+                </Text>
+
+            </Card>
         )
     })
 

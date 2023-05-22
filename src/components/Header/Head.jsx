@@ -13,12 +13,8 @@ function Header() {
                     <span>Jobored</span>
                 </div>
             </NavLink>
-            <a href="#">Поиск Вакансий</a>
-            <NavLink to={'/favorites'}>
-                <span>Избранное</span>
-            </NavLink>
-
-
+            <NavLink to={"/"}>Поиск Вакансий</NavLink>
+            <NavLink to={'/favorites'}> Избранное </NavLink>
         </div>
     )
 

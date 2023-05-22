@@ -11,6 +11,7 @@ import {useDispatch} from "react-redux";
 import FavoritesPage from "./Pages/FavoritesPage/FavoritesPage";
 
 import {setLocalStorage} from "./utils/localStorage";
+import {MantineProvider} from "@mantine/core";
 
 function App() {
 
@@ -41,16 +42,27 @@ function App() {
 
 
     return (
-        <div className="App">
-            <Header/>
-            <Routes>
-                <Route path="/" element={<MainPage/>}/>
-                <Route path="/vacancies/:id" element={<VacancyInfoPage/>}/>
-                <Route path="/favorites" element={<FavoritesPage/>}/>
-            </Routes>
-
-
-        </div>
+        <MantineProvider
+            theme={{
+                // Override any other properties from default theme
+                fontFamily: 'Inter',
+                fontStyle: 'normal',
+                spacing: {xs: '1rem', sm: '1.2rem', md: '1.8rem', lg: '2.2rem', xl: '2.8rem'},
+            }}
+            withGlobalStyles
+            withNormalizeCSS
+        >
+            <div className="App">
+                <Header/>
+                <div className='container'>
+                    <Routes>
+                        <Route path="/" element={<MainPage/>}/>
+                        <Route path="/vacancies/:id" element={<VacancyInfoPage/>}/>
+                        <Route path="/favorites" element={<FavoritesPage/>}/>
+                    </Routes>
+                </div>
+            </div>
+        </MantineProvider>
     )
 }
 
