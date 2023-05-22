@@ -23,7 +23,7 @@ function VacancyInfoPage() {
         setLoading(true);
       });
   }, []);
-console.log(storeVacancyInfo)
+  
   return (
     <>
       {loading ? (

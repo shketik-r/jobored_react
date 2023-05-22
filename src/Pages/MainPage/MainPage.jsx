@@ -46,7 +46,6 @@ const MainPage = () => {
   const handlePageClick = (e) => {
     setCurrentPage(e - 1);
   };
-
  
   return (
     <div className={s.wrapper}>

@@ -3,12 +3,11 @@ import {Route, Routes, Navigate} from 'react-router-dom'
 import MainPage from "./Pages/MainPage/MainPage";
 import Header from "./components/Header/Head";
 import VacancyInfoPage from "./Pages/VacanciesInfoPage/VacancyInfoPage";
-import {getToken, getApiCatalogues} from "./utils/network";
+import {getApiCatalogues} from "./utils/network";
 import {useEffect} from "react";
 import {setCataloguesAC} from "./state/cataloguesReduser";
 import {useDispatch,useSelector} from "react-redux";
 import FavoritesPage from "./Pages/FavoritesPage/FavoritesPage";
-import {setLocalStorage} from "./utils/localStorage";
 import {MantineProvider} from "@mantine/core";
 import   EmptyStatePage from "./Pages/EmptyStatePage/EmptyStatePage";
 
@@ -16,13 +15,12 @@ function App() {
     const dispatch = useDispatch()
     const storeFavorite = useSelector(state => state.favorite.favorite)
     useEffect(() => {
-        if (localStorage.getItem('token') === null) {
-            getToken()
-                .then(res => {
-
-                    setLocalStorage('token', res.data.access_token)
-                })
-        }
+        // if (localStorage.getItem('token') === null) {
+        //     getToken()
+        //         .then(res => {
+        //             setLocalStorage('token', res.data.access_token)
+        //         })
+        // }
         getApiCatalogues()
             .then(res => {
                 const objectsCatalogues = res.data.map((e) => {
@@ -34,9 +32,6 @@ function App() {
                 dispatch(setCataloguesAC(objectsCatalogues))
             })
     }, [])
-
-
-
 
 
     return (

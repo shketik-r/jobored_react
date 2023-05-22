@@ -15,7 +15,6 @@ import {
 import { useForm } from "@mantine/form";
 import { IconChevronDown } from "@tabler/icons-react";
 import { AiOutlineClose } from "react-icons/ai";
-import { Navigate } from "react-router-dom";
 
 function FilterVacancies({ setPages }) {
   const dispatch = useDispatch();

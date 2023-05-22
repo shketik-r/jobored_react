@@ -3,7 +3,6 @@ import { Card } from "@mantine/core";
 
 function Info(props) {
     
-
   function createMarkup() {
     return { __html: props.info[0].vacancyRichText };
   }
