@@ -47,7 +47,7 @@ function VacanciesList({ vacancies, link }) {
         >
           <span className={s.payment}>
             {e.payment_from === 0 && e.payment_to === 0
-              ? "з/п не указана"
+              ? "Уровень дохода не указан"
               : false}
             {e.payment_from === 0 && e.payment_to > 0
               ? `з/п ${e.payment_to}  ${e.currency}`
