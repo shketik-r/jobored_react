@@ -20,8 +20,8 @@ function VacanciesList({ vacancies, link }) {
             display: "flex",
             justifyContent: "space-between",
             fontWeight: 600,
-            fontSize: "20px",
-            lineHeight: "24px",
+            fontSize: "1.25rem",
+            lineHeight: "1.5rem",
             marginBottom: "0.76rem",
           })}
         >
@@ -39,7 +39,7 @@ function VacanciesList({ vacancies, link }) {
             flexDirection: "row",
             flexWrap: "wrap",
             alignItems: "center",
-            fontSize: " 1.25rem",
+            fontSize: " 1rem",
             lineHeight: "1.25rem",
             color: "#232134",
             marginBottom: "0.76rem",

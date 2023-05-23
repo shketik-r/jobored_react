@@ -33,5 +33,10 @@ display: none;
     .payment{
         margin-right: 3rem;
         margin-bottom: 0.2rem;
+        font-size: 0.8rem;
+    }
+    .title{
+    font-size: 0.8rem;
+    line-height: 1rem;
     }
   }
