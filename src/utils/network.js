@@ -10,7 +10,7 @@ const secretKey = "GEU4nvd3rej*jeh.eqp"
 
 
 const instance = axios.create({
-    baseURL: `https://startup-summer-2023-proxy.onrender.com/`,
+    baseURL: `https://startup-summer-2023-proxy.onrender.com/2.0/`,
     headers: {
         "x-secret-key": secretKey,
         "X-Api-App-Id": client_secret,
@@ -19,7 +19,7 @@ const instance = axios.create({
 })
 
 const instanceAuthorization = axios.create({
-    baseURL: `https://startup-summer-2023-proxy.onrender.com/`,
+    baseURL: `https://startup-summer-2023-proxy.onrender.com/2.0/`,
     headers: {
         "x-secret-key": secretKey,
         "X-Api-App-Id": client_secret,
@@ -27,15 +27,15 @@ const instanceAuthorization = axios.create({
 })
 
 export const getApiVacancies = (params) => {
-    return instance.get("2.0/vacancies/", {params})
+    return instance.get("vacancies/", {params})
 }
 
 export const getApiInfo = (id) => {
-    return instance.get(`2.0/vacancies/${id}/`)
+    return instance.get(`vacancies/${id}/`)
 }
 
 export const getApiCatalogues = () => {
-    return instance.get(`2.0/catalogues/`)
+    return instance.get(`catalogues/`)
 }
 
 // export const getToken = (token) => {
