@@ -36,10 +36,6 @@ const MainPage = () => {
       })
       .finally(() => {
         setLoading(true);
-        if (storeVacancies===null) {
-          console.log(storeVacancies)
-          return <Navigate to="/empty" />;
-        }
       });
   }, [currentPage]);
 
