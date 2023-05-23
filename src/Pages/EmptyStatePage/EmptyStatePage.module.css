@@ -16,5 +16,27 @@
 }
 
 .img {
-  width: 60%;
+  width: 70%;
+}
+
+/*---------------560px----------------*/
+
+@media screen and (max-width: 560px) {
+  .wrapper {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+  }
+  .img {
+    width: 100%;
+  }
+  .wrapper p {
+   
+    font-size: 0.8rem;
+    line-height: 1rem;
+    margin-top: 0.5rem ;
+    margin-bottom: 0.8rem;
+  }
 }
