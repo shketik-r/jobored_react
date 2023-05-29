@@ -15,12 +15,11 @@ function App() {
     const dispatch = useDispatch()
     const storeFavorite = useSelector(state => state.favorite.favorite)
     useEffect(() => {
-        // if (localStorage.getItem('token') === null) {
-        //     getToken()
-        //         .then(res => {
-        //             setLocalStorage('token', res.data.access_token)
-        //         })
-        // }
+        
+            // getToken()
+            //     .then(res => {
+            //         console.log('token', res.data.access_token)
+            //     })
         getApiCatalogues()
             .then(res => {
                 const objectsCatalogues = res.data.map((e) => {
